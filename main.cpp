@@ -1,403 +1,246 @@
-#include <conio.h>
-
-#include <cstdio>
-
 #include <iostream>
-
 #include <string.h>
 
-#include <cstdlib>
-
 using namespace std;
-
-static int p = 0;
-
-class a
-
+struct node
 {
-
-  char busn[5], driver[10], arrival[5], depart[5], from[10], to[10], seat[8][4][10];
+    int num = 1;
+    int fill = 0;
+    char name[3][10];
+    node *next;
+    node *prev;
+};
+class transpo
+{
+    node *header[3];
+    node *cn;
 
 public:
-
-  void install();
-
-  void allotment();
-
-  void empty();
-
-  void show();
-
-  void avail();
-
-  void position(int i);
-
-}
-
-bus[10];
-
-void vline(char ch)
-
-{
-
-  for (int i=80;i>0;i--)
-
-  cout<<ch;
-
-}
-
-void a::install()
-
-{
-
-  cout<<"Enter bus no: ";
-
-  cin>>bus[p].busn;
-
-  cout<<"\nEnter Driver's name: ";
-
-  cin>>bus[p].driver;
-
-  cout<<"\nArrival time: ";
-
-  cin>>bus[p].arrival;
-
-  cout<<"\nDeparture: ";
-
-  cin>>bus[p].depart;
-
-  cout<<"\nFrom: \t\t\t";
-
-  cin>>bus[p].from;
-
-  cout<<"\nTo: \t\t\t";
-
-  cin>>bus[p].to;
-
-  bus[p].empty();
-
-  p++;
-
-}
-
-void a::allotment()
-
-{
-
-  int seat;
-
-  char number[5];
-
-  top:
-
-  cout<<"Bus no: ";
-
-  cin>>number;
-
-  int n;
-
-  for(n=0;n<=p;n++)
-
-  {
-
-    if(strcmp(bus[n].busn, number)==0)
-
-    break;
-
-  }
-
-  while(n<=p)
-
-  {
-
-    cout<<"\nSeat Number: ";
-
-    cin>>seat;
-
-    if(seat>32)
-
+    transpo()
     {
-
-      cout<<"\nThere are only 32 seats available in this bus.";
-
+        for (int i = 0; i < 3; i++)
+            header[i] = NULL;
     }
-
-    else
-
+    void create()
     {
-
-    if (strcmp(bus[n].seat[seat/4][(seat%4)-1], "Empty")==0)
-
-      {
-
-        cout<<"Enter passanger's name: ";
-
-        cin>>bus[n].seat[seat/4][(seat%4)-1];
-
-        break;
-
-      }
-
-    else
-
-      cout<<"The seat no. is already reserved.\n";
-
-      }
-
-      }
-
-    if(n>p)
-
-    {
-
-      cout<<"Enter correct bus no.\n";
-
-      goto top;
-
-    }
-
-  }
-
-
-void a::empty()
-
-{
-
-  for(int i=0; i<8;i++)
-
-  {
-
-    for(int j=0;j<4;j++)
-
-    {
-
-      strcpy(bus[p].seat[i][j], "Empty");
-
-    }
-
-  }
-
-}
-
-void a::show()
-
-{
-
-  int n;
-
-  char number[5];
-
-  cout<<"Enter bus no: ";
-
-  cin>>number;
-
-  for(n=0;n<=p;n++)
-
-  {
-
-    if(strcmp(bus[n].busn, number)==0)
-
-    break;
-
-  }
-
-while(n<=p)
-
-{
-
-  vline('*');
-
-  cout<<"Bus no: \t"<<bus[n].busn
-
-  <<"\nDriver: \t"<<bus[n].driver<<"\t\tArrival time: \t"
-
-  <<bus[n].arrival<<"\tDeparture time:"<<bus[n].depart
-
-  <<"\nFrom: \t\t"<<bus[n].from<<"\t\tTo: \t\t"<<
-
-  bus[n].to<<"\n";
-
-  vline('*');
-
-  bus[0].position(n);
-
-  int a=1;
-
-  for (int i=0; i<8; i++)
-
-  {
-
-    for(int j=0;j<4;j++)
-
-    {
-
-      a++;
-
-      if(strcmp(bus[n].seat[i][j],"Empty")!=0)
-
-      cout<<"\nThe seat no "<<(a-1)<<" is reserved for "<<bus[n].seat[i][j]<<".";
-
-    }
-
-  }
-
-  break;
-
-  }
-
-  if(n>p)
-
-    cout<<"Enter correct bus no: ";
-
-}
-
-void a::position(int l)
-
-{
-
-  int s=0;p=0;
-
-  for (int i =0; i<8;i++)
-
-  {
-
-    cout<<"\n";
-
-    for (int j = 0;j<4; j++)
-
-    {
-
-      s++;
-
-      if(strcmp(bus[l].seat[i][j], "Empty")==0)
-
+        for (int i = 0; i < 3; i++)
         {
+            for (int j = 0; j < 9; j++)
+            {
+                node *nn = new node;
+                nn->next = NULL;
+                nn->prev = NULL;
+                if (header[i] == NULL)
+                {
+                    header[i] = nn;
+                    nn->num = 1;
+                }
+                else
+                {
+                    node *cn = header[i];
+                    while (cn->next != NULL)
+                    {
+                        cn = cn->next;
+                    }
+                    if (j == 3 || j == 5 || j == 7 || j == 8)
+                    {
+                        cn->num = 3;
+                    }
+                    if (j == 2 || j == 4 || j == 6)
+                    {
+                        cn->num = 2;
+                    }
+                    cn->next = nn;
+                    nn->prev = cn;
+                }
+            }
+        }
+    }
+    void display()
+    {
+        int j = 0, k = 0, l = 0;
+        for (int i = 0; i < 48; i++)
+        {
+            cout << "--";
+        }
+        cout << "\n "
+        ;
+        for (int i = 1; i < 4; i++)
+        {
+            cout << "| Column number : "<< i << " \t\t";
+        }
+        cout << "|\n" ;
+        for (int i = 0; i < 48; i++)
+        {
+            cout << "--";
+        }
+        cn = header[j];
+        node *sn = header[j + 1];
+        node *tn = header[j + 2];
+        cout << "\n ";
+        while (cn != NULL)
+        {
+            if (cn->fill != cn->num && cn->num != 0)
+            {
+                j++;
+                cout << "| Seat no : "<< j;
+                cout << "->Vacant cots->"<< cn->num;
+            }
+            else
+            {
+                j++;
+                cout << "| Seat no : "<< j;
+                cout << "->Present ";
+            }
+            if (sn->fill != sn->num && sn->num != 0)
+            {
+                k++;
+                cout << "\t |Seat no : "<< j;
+                cout << "->Vacant cots->"<< sn->num;
+            }
+            else
+            {
+                k++;
+                cout << " \t | Seat  no : "<< j;
+                cout << "->Present ";
+            }
+            if (tn->fill != tn->num && tn->num != 0)
+            {
+                l++;
+                cout << "\t | Seat  no : "<< j;
+                cout << "->Vacant cots->"<< tn->num << "| ";
+            }
+            else
+            {
+                l++;
+                cout << "\t | Seat no : "<< j;
+                cout << "->Present "<< " | ";
+            }
+            cout << " \n ";
+            for (int i = 0; i < 48; i++)
+            {
+                cout << "--" ;
+            }
+            cout << "\n ";
+            cn = cn->next;
+            sn = sn->next;
+            tn = tn->next;
+        }
+    }
+    void book(int people)
+    {
+        int col, sts;
+        cout << "\nEnter the column number : ";
+        cin >> col;
+        try
+        {
+            if (col < 0 ||col > 4)
 
-          cout.width(5);
+            {
+                throw(col);
+            }
+            cn = header[col - 1];
 
-          cout.fill(' ');
+            cout << "\nEnter the seat number : ";
+            cin >> sts;
+            try
+            {
 
-          cout<<s<<".";
+                if (sts < 0 || sts > 10)
+                {
+                    throw(sts);
+                }
+                else
+                {
+                    int i = 1;
+                    while (i < sts)
+                    {
+                        cn = cn->next;
+                        i++;
+                    }
+                    if (cn->num >= people)
+                    {
+                        cout << "\nSeat is vacant you can apply for seat " ;
 
-          cout.width(10);
+                        int count = 0;
+                        while (cn->fill - 1 <= cn->num)
+                        {
 
-          cout.fill(' ');
+                            cout << "\nEnter name "<< cn -> fill + 1 << " : ";
 
-          cout<<bus[l].seat[i][j];
+                            cin >> cn->name[cn->fill];
+                            count++;
+                            cn->fill++;
+                            if (count >= people)
+                            {
+                                break;
+                            }
+                        }
+                        cn->num = cn->num - people;
+                    }
 
-          p++;
-
+                    else
+                    {
+                        cout << "\nSeat is already taken, sorry !!!";
+                    }
+                }
+            }
+            catch (int r)
+            {
+                cout << "\nInvalid  column number : "<< r;
+            }
+        }
+        catch (int r)
+        {
+            cout << " \ninvalid Seat  number : " << r;
         }
 
-        else
+        catch (int r)
 
         {
-
-        cout.width(5);
-
-        cout.fill(' ');
-
-        cout<<s<<".";
-
-        cout.width(10);
-
-        cout.fill(' ');
-
-        cout<<bus[l].seat[i][j];
-
+            cout << "\nSeat doesn't exist : "<< r;
         }
-
-      }
-
     }
-
-  cout<<"\n\nThere are "<<p<<" seats empty in Bus No: "<<bus[l].busn;
-
-  }
-
-void a::avail()
-
-{
-
-
-  for(int n=0;n<p;n++)
-
-  {
-
-    vline('*');
-
-    cout<<"Bus no: \t"<<bus[n].busn<<"\nDriver: \t"<<bus[n].driver
-
-    <<"\t\tArrival time: \t"<<bus[n].arrival<<"\tDeparture Time: \t"
-
-    <<bus[n].depart<<"\nFrom: \t\t"<<bus[n].from<<"\t\tTo: \t\t\t"
-
-    <<bus[n].to<<"\n";
-
-    vline('*');
-
-    vline('_');
-
-  }
-
-}
-
+};
 int main()
-
 {
 
-system("cls");
-
-int w;
-
-while(1)
-
-{
-
-    //system("cls");
-
-  cout<<"\n\n\n\n\n";
-
-  cout<<"\t\t\t1.Install\n\t\t\t"
-
-  <<"2.Reservation\n\t\t\t"
-
-  <<"3.Show\n\t\t\t"
-
-  <<"4.Buses Available. \n\t\t\t"
-
-  <<"5.Exit";
-
-  cout<<"\n\t\t\tEnter your choice:-> ";
-
-  cin>>w;
-
-  switch(w)
-
-  {
-
-    case 1:  bus[p].install();
-
-      break;
-
-    case 2:  bus[p].allotment();
-
-      break;
-
-    case 3:  bus[0].show();
-
-      break;
-
-    case 4:  bus[0].avail();
-
-      break;
-
-    case 5:  exit(0);
-
-  }
-
-}
-
-return 0;
-
+    transpo obj;
+    int key;
+    char ch;
+    obj.create();
+    do
+    {
+        cout << "\n1.Reserve a seat for 1 person\n2.Reserve a seat for 2 persons\n3.Reserve a seat for 3 persons\n4.Display the current status of reserve a seat"<< endl;
+        cout << " Enter your choice : "   ;
+        cin >> key;
+        switch (key)
+        {
+        case 1:
+        {
+            obj.book(1);
+            break;
+        }
+        case 2:
+        {
+            obj.book(2);
+            break;
+        }
+        case 3:
+        {
+            obj.book(3);
+            break;
+        }
+        case 4:
+        {
+            obj.display();
+            break;
+        }
+    
+        default:
+            cout << "\nInvalid choice ";
+        }
+        cout << "\nDo you want to continue(Y / N) ";
+        cin >> ch;
+    } while (ch =='Y'|| ch =='y');
 }
