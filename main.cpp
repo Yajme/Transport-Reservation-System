@@ -2,6 +2,8 @@
 #include <string.h>
 
 using namespace std;
+
+
 struct node
 {
     int num = 1;
@@ -201,46 +203,115 @@ public:
             cout << "\nSeat doesn't exist : "<< r;
         }
     }
+
+void createBus(){
+
+int size;
+
+
+
+
+
+}
+
+
+string showBus(string x){
+
+    string bus = x;
+
+
+    if(bus.empty()){
+
+
+        return "Bus is Empty\n";
+    }
+
+
+}
+
+
 };
+
+
+
 int main()
 {
 
     transpo obj;
     int key;
-    char ch;
+    bool ch = 1;
     obj.create();
-    do
-    {
-        cout << "\n1.Reserve a seat for 1 person\n2.Reserve a seat for 2 persons\n3.Reserve a seat for 3 persons\n4.Display the current status of reserve a seat"<< endl;
+
+
+
+    for(int x = 0; x < 50; x++){
+
+        cout<<"=";
+
+    }
+
+    cout << "\n=\t\tMenu\t\t\t\t =\n";
+
+    for(int x = 0; x < 50; x++){
+
+        cout<<"=";
+
+}
+    do{
+
+    cout << "\n1. Add Bus Name \n2.Bus Reservation\n3.Show Buses Available\n4.Exit\nEnter Your choice-->";
+
+    cin >> key;
+
+    if(key == 1){
+
+    }else if(key == 2){
+
+         do{
+
+        cout << "\n1.Reserve a seat for 1 person\n2.Reserve a seat for 2 persons\n3.Reserve a seat for 3 persons\n4.Display the current status of reserve a seat\n5.Exit\n";
         cout << " Enter your choice : "   ;
         cin >> key;
         switch (key)
         {
         case 1:
-        {
+
             obj.book(1);
             break;
-        }
+
         case 2:
-        {
+
             obj.book(2);
             break;
-        }
+
         case 3:
-        {
+
             obj.book(3);
             break;
-        }
+
         case 4:
-        {
+
             obj.display();
             break;
-        }
-    
+        case 5:
+            ch = 0;
+            break;
         default:
-            cout << "\nInvalid choice ";
+            cout << "Invalid Choice!\n";
+            break;
         }
-        cout << "\nDo you want to continue(Y / N) ";
-        cin >> ch;
-    } while (ch =='Y'|| ch =='y');
+
+
+        }while(ch);
+
+    }else if(key == 3){
+
+    }else if(key == 4){
+    ch = 0;
+    }
+
+}while(ch);
+
+
+    return 0;
 }
