@@ -224,16 +224,31 @@ void showBus(){
 
     if(size == 0){
 
-
         cout << "No Bus Found\n";
 
     }
     for(int x = 0; x < size; x++){
 
-        cout <<"["<<x+1<<"]" << queue[size] << endl;
+        cout <<"["<<x+1<<"]" << queue[x] << endl;
     }
 
 
+}
+void selectBus(string x){
+
+    if(size == 0){
+
+        cout << "No Bus Found/n";
+    }
+
+    for(int i = 0; i < size;i++)
+    {
+
+        if(x == queue[i])
+        {
+
+        }
+    }
 }
 
 
@@ -247,7 +262,8 @@ int main()
     transpo obj;
     int key;
     string busName;
-    bool ch = 1;
+    bool ch0 = 1, ch1 = 1;
+
     obj.create();
 
 
@@ -267,7 +283,7 @@ int main()
 }
     do{
 
-    cout << "\n1. Add Bus Name \n2.Bus Reservation\n3.Show Buses Available\n4.Exit\nEnter Your choice--> ";
+    cout << "\n1. Add Bus Name \n2.Bus Reservation\n3.Show Buses Available\n4.Exit\n\n\tEnter Your choice--> ";
 
     cin >> key;
 
@@ -307,7 +323,7 @@ int main()
             obj.display();
             break;
         case 5:
-            ch = 0;
+            ch1 = 0;
             break;
         default:
             cout << "Invalid Choice!\n";
@@ -315,17 +331,17 @@ int main()
         }
 
 
-        }while(ch);
+        }while(ch1);
 
     }else if(key == 3){
 
         obj.showBus();
 
     }else if(key == 4){
-    ch = 0;
+    ch0 = 0;
     }
 
-}while(ch);
+}while(ch0);
 
 
     return 0;
