@@ -13,12 +13,22 @@ struct node
     node *prev;
 
 };
+
+struct busInfo{
+
+    int busNumber;
+    string busName;
+    string busDriver;
+
+
+
+};
 class transpo
 {
     node *header[3];
     node *cn;
     int size;
-    string* queue;
+    busInfo* queue;
 
 public:
     transpo()
@@ -28,7 +38,7 @@ public:
         }
 
         size = 0;
-        queue = new string[100];
+        queue = new busInfo[100];
     }
     void create()
     {
@@ -211,9 +221,9 @@ public:
         }
     }
 
-void createBus(string bus){
+void createBus(busInfo regBus){
 
-    queue[size] = bus;
+    queue[size] = regBus;
     size++;
     cout << "Bus created\n";
 }
@@ -229,7 +239,7 @@ void showBus(){
     }
     for(int x = 0; x < size; x++){
 
-        cout <<"["<<x+1<<"]" << queue[x] << endl;
+        cout <<"["<<x+1<<"]" << queue[x].busName << endl;
     }
 
 
@@ -244,7 +254,7 @@ void selectBus(string x){
     for(int i = 0; i < size;i++)
     {
 
-        if(x == queue[i])
+        if(x == queue[i].busName)
         {
 
         }
@@ -260,6 +270,7 @@ int main()
 {
 
     transpo obj;
+    busInfo bus;
     int key;
     string busName;
     bool ch0 = 1, ch1 = 1;
@@ -283,14 +294,19 @@ int main()
 }
     do{
 
-    cout << "\n1. Add Bus Name \n2.Bus Reservation\n3.Show Buses Available\n4.Exit\n\n\tEnter Your choice--> ";
+    cout << "\n1. Add Bus Name \n2.Bus Reservation\n3.Cancel Bus Reservation\n4.Show Buses Available\n5.Exit\n\n\tEnter Your choice--> ";
 
     cin >> key;
 
     if(key == 1){
             cout << "Enter Bus name:";
-            cin >> busName;
-            obj.createBus(busName);
+            cin >> bus.busName;
+            cout << "Enter Bus Driver:";
+            cin >> bus.busDriver;
+            cout << "Enter Bus Number:";
+            cin >> bus.busNumber;
+
+            obj.createBus(bus);
 
 
 
@@ -335,9 +351,13 @@ int main()
 
     }else if(key == 3){
 
-        obj.showBus();
+
 
     }else if(key == 4){
+
+        obj.showBus();
+
+    }else if(key == 5){
     ch0 = 0;
     }
 
