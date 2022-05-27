@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string.h>
-
 using namespace std;
 
 
@@ -203,6 +202,7 @@ public:
                         cout << "\nSeat is already taken, sorry !!!";
                     }
                 }
+
             }
             catch (int r)
             {
@@ -221,6 +221,12 @@ public:
         }
     }
 
+void remove()
+{
+
+
+
+}
 void createBus(busInfo regBus){
 
     queue[size] = regBus;
@@ -248,7 +254,8 @@ void selectBus(string x){
 
     if(size == 0){
 
-        cout << "No Bus Found/n";
+        cout << "No Bus Found\n";
+
     }
 
     for(int i = 0; i < size;i++)
@@ -260,6 +267,8 @@ void selectBus(string x){
         }
     }
 }
+
+
 
 
 };
@@ -279,20 +288,22 @@ int main()
 
 
 
-    for(int x = 0; x < 50; x++){
+
+    do{
+
+        for(int x = 0; x < 50; x++){
 
         cout<<"=";
 
-    }
+        }
 
     cout << "\n=\t\tMenu\t\t\t\t =\n";
 
-    for(int x = 0; x < 50; x++){
+        for(int x = 0; x < 50; x++){
 
         cout<<"=";
 
-}
-    do{
+        }
 
     cout << "\n1. Add Bus Name \n2.Bus Reservation\n3.Cancel Bus Reservation\n4.Show Buses Available\n5.Exit\n\n\tEnter Your choice--> ";
 
@@ -311,6 +322,31 @@ int main()
 
 
     }else if(key == 2){
+
+        string selectBus;
+        bool busReserve = 1;
+
+
+
+
+
+        do{
+
+        obj.showBus();
+
+
+
+        cout << "Select Bus:";
+        cin >> selectBus;
+
+        obj.selectBus(selectBus);
+        busReserve = 0;
+
+
+        }while(busReserve);
+
+
+
 
          do{
 
@@ -347,6 +383,8 @@ int main()
         }
 
 
+
+
         }while(ch1);
 
     }else if(key == 3){
@@ -361,7 +399,12 @@ int main()
     ch0 = 0;
     }
 
+
+
+
+
 }while(ch0);
+
 
 
     return 0;
