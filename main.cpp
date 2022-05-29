@@ -39,6 +39,7 @@ public:
         size = 0;
         queue = new busInfo[100];
     }
+
     void create()
     {
         for (int i = 0; i < 3; i++)
@@ -50,7 +51,7 @@ public:
                 nn->prev = NULL;
                 if (header[i] == NULL)
                 {
-                    header[i] = nn;
+                    header[i] = nn; //head
                     nn->num = 1;
                 }
                 else
@@ -74,6 +75,7 @@ public:
             }
         }
     }
+
     void display()
     {
         int j = 0, k = 0, l = 0;
@@ -223,6 +225,7 @@ public:
 
 void remove()
 {
+char srch[3][10];
 
 
 
@@ -310,6 +313,7 @@ int main()
     cin >> key;
 
     if(key == 1){
+
             cout << "Enter Bus name:";
             cin >> bus.busName;
             cout << "Enter Bus Driver:";
@@ -317,14 +321,14 @@ int main()
             cout << "Enter Bus Number:";
             cin >> bus.busNumber;
 
-            obj.createBus(bus);
+            obj.createBus(bus); //registers bus data passed to method create bus
 
 
 
     }else if(key == 2){
 
         string selectBus;
-        bool busReserve = 1;
+        bool busReserve = 1; //bool busReserve is true
 
 
 
@@ -332,18 +336,17 @@ int main()
 
         do{
 
-        obj.showBus();
+        obj.showBus(); //displays registered bus
 
 
+        cout << "Select Bus:"; //promt message
+        cin >> selectBus; //input string name of bus
 
-        cout << "Select Bus:";
-        cin >> selectBus;
-
-        obj.selectBus(selectBus);
-        busReserve = 0;
+        obj.selectBus(selectBus); //string bus is to be passed to object select bus
+        busReserve = 0;//breaks the loop
 
 
-        }while(busReserve);
+        }while(busReserve); //bool busReserve keeps the loop
 
 
 
@@ -385,15 +388,25 @@ int main()
 
 
 
-        }while(ch1);
+        }while(ch1);//keeps the loop alive, breaks if set to false
 
     }else if(key == 3){
+
+
+/*
+
+
+
+
+
+
+*/
 
 
 
     }else if(key == 4){
 
-        obj.showBus();
+        obj.showBus(); //displays registered bus
 
     }else if(key == 5){
     ch0 = 0;
