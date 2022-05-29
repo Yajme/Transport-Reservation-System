@@ -223,13 +223,81 @@ public:
         }
     }
 
-void remove()
-{
-char srch[3][10];
+void cancel(int check)
+    {
+        char namecheck[10];
+        int flag = 0;
+        int seat, i = 1;
+        try
+        {
+            if (check < 0 || check > 4)
 
+            {
+                throw(check);
+            }
+            else
+            {
+                cout << " Enter the Seat  no : ";
+                cin >> seat;
+                try
+                {
+                    if (seat < 0 ||seat > 10)
+                    {
+                        throw(seat);
+                    }
+                    else
+                    {
+                        cout << " Enter the name to be delete :";
 
+                        cin >> namecheck;
+                        cn = header[check - 1];
+                        while (i < seat)
+                        {
+                            cn = cn->next;
+                            i++;
+                        }
+                        i = 0;
+                        while (i < 3)
+                        {
 
-}
+                            if (!strcmp(namecheck, cn -> name[i]))
+
+                            {
+                                flag = 1;
+                                break;
+                                i = 0;
+                            }
+                            else
+                                i++;
+                        }
+                        if (flag == 1 && cn->fill != 0)
+                        {
+                            cout << "\nrecord deleted : "<< cn -> name[i];
+
+                            cn->name[i][0] ='A';
+                            cn->name[i][1] ='\0';
+                            cn->fill--;
+                            cn->num++;
+                        }
+                        else
+
+                            cout << "\nrecord not present ";
+                    }
+                }
+                catch (int r)
+                {
+                    cout << "\ninvalid Seat number : " << r <<endl;
+                }
+            }
+        }
+
+        catch (int r)
+
+        {
+            cout << " \n Seat  doesn't exist : " << r <<endl;
+        }
+    };
+
 void createBus(busInfo regBus){
 
     queue[size] = regBus;
@@ -293,6 +361,7 @@ int main()
 
 
     do{
+            system("cls");
 
         for(int x = 0; x < 50; x++){
 
@@ -323,14 +392,12 @@ int main()
 
             obj.createBus(bus); //registers bus data passed to method create bus
 
-
+            system("pause");
 
     }else if(key == 2){
 
         string selectBus;
         bool busReserve = 1; //bool busReserve is true
-
-
 
 
 
@@ -352,6 +419,7 @@ int main()
 
 
          do{
+                system("cls");
 
         cout << "\n1.Reserve a seat for 1 person\n2.Reserve a seat for 2 persons\n3.Reserve a seat for 3 persons\n4.Display the current status of reserve a seat\n5.Exit\n";
         cout << " Enter your choice : "   ;
@@ -385,6 +453,8 @@ int main()
             break;
         }
 
+        system("pause");
+
 
 
 
@@ -403,10 +473,14 @@ int main()
 */
 
 
+    obj.cancel(1);
+    system("pause");
 
     }else if(key == 4){
+        string cont;
 
         obj.showBus(); //displays registered bus
+        system("pause");
 
     }else if(key == 5){
     ch0 = 0;
